@@ -1,3 +1,10 @@
+/* ================== SOUND ================== */
+const fireworkSounds = [
+    new Audio('firework.mp3')
+];
+fireworkSounds.forEach(s => s.volume = 0.6);
+
+/* ================== FIREWORK ================== */
 class Firework {
     constructor(w, h) {
         this.w = w;
@@ -15,6 +22,11 @@ class Firework {
     }
 
     explode() {
+        // 🔊 Play sound
+        const sound = fireworkSounds[Math.floor(Math.random() * fireworkSounds.length)];
+        sound.currentTime = 0;
+        sound.play();
+
         for (let i = 0; i < 150; i++) {
             const a = Math.random() * Math.PI * 2;
             const s = Math.random() * 6 + 4;
@@ -67,6 +79,7 @@ class Firework {
     }
 }
 
+/* ================== SHOW ================== */
 class FireworkShow {
     constructor() {
         this.canvas = document.getElementById('canvas');
@@ -85,7 +98,7 @@ class FireworkShow {
     }
 
     drawCountdown() {
-        this.ctx.fillStyle = 'rgba(0,0,0,0.3)';
+        this.ctx.fillStyle = 'rgba(0,0,0,0.4)';
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
         this.ctx.fillStyle = '#fff';
@@ -102,11 +115,9 @@ class FireworkShow {
                 clearInterval(timer);
                 this.startShow();
 
-                // Show text
                 document.getElementById('newYearText').style.animation =
                     'newYearAnim 3s ease forwards';
 
-                // Show button
                 document.getElementById('videoBtn').classList.add('show');
             }
         }, 1000);
@@ -137,7 +148,7 @@ class FireworkShow {
     }
 }
 
-/* VIDEO SHOW UNDER TEXT */
+/* ================== VIDEO ================== */
 const videoBtn = document.getElementById('videoBtn');
 const video = document.getElementById('newYearVideo');
 
@@ -146,6 +157,7 @@ videoBtn.addEventListener('click', () => {
     video.play();
 });
 
+/* ================== START ================== */
 window.onload = () => {
     new FireworkShow().startCountdown();
 };
