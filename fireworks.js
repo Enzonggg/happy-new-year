@@ -2,19 +2,19 @@
 const fireworkSounds = [
     new Audio('firework.mp3')
 ];
-fireworkSounds.forEach(s => s.volume = 0.6);
+fireworkSounds.forEach(s => s.volume = 0.6); // Fixed volume
 
 /* ================== FIREWORK ================== */
 class Firework {
     constructor(w, h) {
         this.w = w;
         this.h = h;
-        this.x = Math.random() * w;
-        this.y = h;
-        this.tx = Math.random() * w;
-        this.ty = Math.random() * (h / 2) + 100;
-        this.vx = (this.tx - this.x) / 50;
-        this.vy = (this.ty - this.y) / 50;
+        this.x = Math.random() * w;               // Random horizontal start
+        this.y = h;                               // Start at bottom
+        this.tx = this.x;                         // Target x = same (straight up)
+        this.ty = Math.random() * (h / 2) + 100; // Target y
+        this.vx = 0;                              // No horizontal movement
+        this.vy = (this.ty - this.y) / 50;       // Vertical velocity
         this.exploded = false;
         this.particles = [];
         this.colors = ['#ff0044','#00ffcc','#ffff00','#ff6600','#00ff00','#ff00ff'];
@@ -22,7 +22,7 @@ class Firework {
     }
 
     explode() {
-        // 🔊 Play sound
+        // 🔊 Play explosion sound
         const sound = fireworkSounds[Math.floor(Math.random() * fireworkSounds.length)];
         sound.currentTime = 0;
         sound.play();
