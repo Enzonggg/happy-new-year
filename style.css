@@ -1,0 +1,77 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+
+canvas {
+    background: #000;
+    display: block;
+}
+
+/* Container */
+#newYearContainer {
+    position: fixed;
+    top: 15%;
+    width: 100%;
+    text-align: center;
+    z-index: 10;
+}
+
+/* Happy New Year Text */
+#newYearText {
+    font-size: 64px;
+    font-weight: bold;
+    color: gold;
+    opacity: 0;
+    text-shadow: 0 0 20px red, 0 0 40px yellow;
+}
+
+/* Text animation */
+@keyframes newYearAnim {
+    0% { opacity: 0; transform: scale(0.5); }
+    50% { opacity: 1; transform: scale(1.2); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+/* Video */
+#newYearVideo {
+    display: none;
+    margin: 25px auto 0;
+    width: 60%;
+    max-width: 720px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px black;
+}
+
+/* Button */
+#videoBtn {
+    position: fixed;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 14px 28px;
+    font-size: 18px;
+    background: crimson;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    z-index: 10;
+    box-shadow: 0 0 15px red;
+
+    /* hidden until countdown ends */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1s ease;
+}
+
+#videoBtn.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#videoBtn:hover {
+    background: gold;
+    color: black;
+}
